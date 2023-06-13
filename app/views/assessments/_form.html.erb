@@ -1,0 +1,35 @@
+<%= form_for(@assessment) do |f| %>
+  <% if @assessment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@assessment.errors.count, "error") %> prohibited this assessment from being saved:</h2>
+
+      <ul>
+      <% @assessment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <a id='select-all-button' style="cursor: pointer;"> Select/Desect All </a>
+  <div class="field">
+    <% options =  Employee.all.pluck(:name, :id) %>
+
+    <% options.each do |option| %>
+      <%= check_box_tag 'options[]', option[1] %>
+      <%= label_tag option[1], option[0] %><br>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+<script>
+  $('#select-all-button').on("click", function(){
+    var cbxs = $('input[type="checkbox"]');
+    cbxs.prop("checked", !cbxs.prop("checked"));
+  });
+</script>

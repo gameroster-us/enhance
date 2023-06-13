@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Enhance</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div>
+  <%= link_to "Add Employee", new_employee_path %> |
+  <%= link_to "Add Job", new_job_path %> |
+  <%= link_to "Job", jobs_path %> |
+  <%= link_to "Employee", employees_path %> |
+  <%= link_to "Privious History", assessments_path %> |
+  <% if user_signed_in? %>
+    <%= link_to "Sign Out", destroy_user_session_path %>
+  <% else %>
+    <%= link_to "Sign In", new_user_session_path %>
+  <% end %>
+  </div>
+  <p id="notice"><%= notice %></p>
+  <%= yield %>
+</body>
+</html>
