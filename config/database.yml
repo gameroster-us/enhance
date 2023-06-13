@@ -86,4 +86,4 @@ production:
   <<: *default
   database: enhance_production
   username: enhance
-  password: <%= ENV['ENHANCE_DATABASE_PASSWORD'] %>
+  password: GFTHjdfDXQXTEdGOlkxAXXxmu4mbDcWY
