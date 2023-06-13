@@ -85,5 +85,5 @@ test:
 production:
   <<: *default
   database: enhance_production
-  username: enhance
+  username: enhance_production_user
   password: GFTHjdfDXQXTEdGOlkxAXXxmu4mbDcWY
