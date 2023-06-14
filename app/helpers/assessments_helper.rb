@@ -1,11 +1,11 @@
 module AssessmentsHelper
 
   def employee_name(id)
-    Employee.find(id).name
+    Employee.with_deleted.find(id).name
   end
 
   def job_name(id)
-    Job.find(id).name
+    Job.with_deleted.find(id).name
   end
 
   def count_days(emp_id, job_id)

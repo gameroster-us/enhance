@@ -1,6 +1,6 @@
 class AssessmentsController < ApplicationController
   def index
-    @jobs = Job.all
+    @jobs = Job.with_deleted.all
     if params[:created_at].present?
       @assessments = Assessment.where('DATE(created_at) = ?', params[:created_at])
     end

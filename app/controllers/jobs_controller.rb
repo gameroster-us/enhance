@@ -53,7 +53,7 @@ class JobsController < ApplicationController
 
   private
     def set_job
-      @job = Job.find(params[:id])
+      @job = Job.with_deleted.find(params[:id])
     end
 
     def job_params
