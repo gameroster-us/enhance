@@ -7,6 +7,8 @@ class EmployeesController < ApplicationController
   end
 
   def show
+    @employee = Employee.with_deleted.find(params[:id])
+    @assessments = Assessment.where(employee_id: @employee.id)
   end
 
   def new

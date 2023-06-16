@@ -1,0 +1,15 @@
+<%= form_for Assessment.new, url: manually_assign_job_path do |f| %>
+  <p style="border-style: outset; padding: 15px;">
+
+    <%= f.label :Employee %>
+    <%= f.select(:employee_id, Employee.all.collect {|u| [u.name, u.id]}, :prompt => 'Select') %>
+  
+    <%= f.label :Job %>
+    <%= f.select(:job_id, Job.all.collect {|u| [u.name, u.id]}, :prompt => 'Select') %>
+  
+    <%= f.label :Date %>
+    <%= f.date_field :created_at, value: Time.now.strftime('%Y-%m-%d') %>
+  
+    <%= f.submit 'Assign'%>
+  </p>
+<% end %>
