@@ -2,7 +2,7 @@
 <%= link_to 'Assign job', new_assessment_path %><br/><br/>
 
 <%= form_tag(assessments_path, method: :get) do %>
-  <%= date_field_tag :created_at, params[:created_at] %>
+  <%= date_field_tag :created_at, params[:created_at], value: Time.now.strftime('%Y-%m-%d') %>
   <%= submit_tag 'Search', name: nil %>
   <% if params[:created_at].present? %>
     <%= link_to "clear", assessments_path %>
