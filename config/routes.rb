@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :assessments
 
   devise_for :users, :skip => :registration
+  post 'manually_assign_job',            to: 'assessments#manually_assign_job',       as: 'manually_assign_job'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

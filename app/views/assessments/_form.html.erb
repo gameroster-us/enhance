@@ -13,12 +13,16 @@
 
   <a id='select-all-button' style="cursor: pointer;"> Select/Desect All </a>
   <div class="field">
-    <% options =  Employee.all.pluck(:name, :id) %>
+    <% options = Employee.all.pluck(:name, :id) %>
 
     <% options.each do |option| %>
       <%= check_box_tag 'options[]', option[1] %>
       <%= label_tag option[1], option[0] %><br>
     <% end %>
+  </div>
+
+  <div class="field">
+    <%= date_field_tag :created_at, params[:created_at], value: Time.now.strftime('%Y-%m-%d') %>
   </div>
 
   <div class="actions">

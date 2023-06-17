@@ -1,50 +1,35 @@
+<h1>Manually Assign Job</h1>
+
+<%= render 'manually_form' %></br>
+
 <h1>Privious History</h1>
-<%= link_to 'Assign job', new_assessment_path %><br/><br/>
 
 <%= form_tag(assessments_path, method: :get) do %>
-  <%= date_field_tag :created_at, params[:created_at] %>
+  <%= date_field_tag :created_at, params[:created_at], value: Time.now.strftime('%Y-%m-%d') %>
   <%= submit_tag 'Search', name: nil %>
   <% if params[:created_at].present? %>
     <%= link_to "clear", assessments_path %>
   <% end %>
 <% end %>
 
-
 <table class="table">
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Id</th>
+      <th>Employee Name</th>
+      <th>Project Name</th>
+      <th>Worked Date</th>
       <th colspan="2"></th>
     </tr>
   </thead>
-
   <tbody>
-    <% @jobs.each do |job| %>
+    <% @assessments.each do |as| %>
       <tr>
-        <td><%= link_to job.name, job_path(job) %></td>
+        <td><%= as.id %></td>
+        <td><%= employee_name(as.employee_id) %></td>
+        <td><%= job_name(as.job_id) %></td>
+        <td><%= as.created_at.strftime("%d/%m/%Y") %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<% if @assessments.present? %>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Employee Name</th>
-        <th>Project Name</th>
-        <th>Worked Date</th>
-        <th colspan="2"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @assessments.each do |as| %>
-        <tr>
-          <td><%= employee_name(as.employee_id) %></td>
-          <td><%= job_name(as.job_id) %></td>
-          <td><%= as.created_at.strftime("%d/%m/%Y") %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
