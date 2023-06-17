@@ -11,19 +11,18 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group mt-5">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control", placeholder: "Enter Name" %>
   </div>
-  <div class="field">
-    <%= f.label :number_of_capacity %><br>
-    <%= f.text_field :number_of_capacity %>
+  <div class="form-group">
+    <%= f.label :number_of_capacity %>
+    <%= f.text_field :number_of_capacity, class: "form-control", placeholder: "Enter Job Capacity" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :employee_ids, "Employee" %><br>
     <%= select_tag 'job[employee_ids][]', options_for_select(Employee.all.pluck(:name, :id), {prompt: "Select Employee", selected: @job.employees.ids}), {class: "form-control form-control-sm", multiple: true} %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= link_to 'Back', jobs_path, class: "btn btn-outline-info btn-sm" %>
+  <%= f.submit class: "btn btn-outline-primary btn-sm"%>
 <% end %>

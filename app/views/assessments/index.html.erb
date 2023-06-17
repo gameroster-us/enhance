@@ -1,35 +1,46 @@
-<h1>Manually Assign Job</h1>
+<div class="card-body">
+  <h3>Manually Assign Job</h3>
 
-<%= render 'manually_form' %></br>
+  <%= render 'manually_form' %><hr/>
 
-<h1>Privious History</h1>
+  <h3>Privious History</h3>
 
-<%= form_tag(assessments_path, method: :get) do %>
-  <%= date_field_tag :created_at, params[:created_at], value: Time.now.strftime('%Y-%m-%d') %>
-  <%= submit_tag 'Search', name: nil %>
-  <% if params[:created_at].present? %>
-    <%= link_to "clear", assessments_path %>
+  <%= form_tag(assessments_path, method: :get, class: "mt-4") do %>
+    <div class="row">
+      <div class="col-4">
+        <div class="form-group">
+          <%= date_field_tag :created_at, params[:created_at], class: "form-control"%>
+        </div>
+      </div>
+      <div class="col-1">
+        <%= submit_tag 'Search', class: 'btn btn-outline-info btn-sm' %>
+      </div>
+      <div class="col-1">
+        <%= link_to "Clear", assessments_path, class: 'btn btn-outline-info btn-sm' if params[:created_at].present? %>
+      </div>
+    </div>
+    
   <% end %>
-<% end %>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Employee Name</th>
-      <th>Project Name</th>
-      <th>Worked Date</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @assessments.each do |as| %>
+  <table class="table mt-5">
+    <thead>
       <tr>
-        <td><%= as.id %></td>
-        <td><%= employee_name(as.employee_id) %></td>
-        <td><%= job_name(as.job_id) %></td>
-        <td><%= as.created_at.strftime("%d/%m/%Y") %></td>
+        <th>Id</th>
+        <th>Employee Name</th>
+        <th>Project Name</th>
+        <th>Worked Date</th>
+        <th colspan="2"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @assessments.each do |as| %>
+        <tr>
+          <td><%= as.id %></td>
+          <td><%= employee_name(as.employee_id) %></td>
+          <td><%= job_name(as.job_id) %></td>
+          <td><%= as.created_at.strftime("%d/%m/%Y") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,21 +1,23 @@
-<h1><%= @employee&.name %>Job History</h1>
+<div class="card-body">
+  <h4><%= @employee&.name %> Job History</h4>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Job Name</th>
-      <th>Worked Date</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @assessments.each do |as| %>
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= as.id %></td>
-        <td><%= job_name(as.job_id) %></td>
-        <td><%= as.created_at.strftime("%d/%m/%Y") %></td>
+        <th>Id</th>
+        <th>Job Name</th>
+        <th>Worked Date</th>
+        <th colspan="2"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @assessments.each do |as| %>
+        <tr>
+          <td><%= as.id %></td>
+          <td><%= job_name(as.job_id) %></td>
+          <td><%= as.created_at.strftime("%d/%m/%Y") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

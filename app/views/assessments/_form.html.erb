@@ -21,12 +21,13 @@
     <% end %>
   </div>
 
-  <div class="field">
-    <%= date_field_tag :created_at, params[:created_at], value: Time.now.strftime('%Y-%m-%d') %>
+  <div class="form-group">
+    <%= date_field_tag :created_at, params[:created_at], value: Time.now.strftime('%Y-%m-%d'), class: "form-control" %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= link_to 'Back', assessments_path, class: "btn btn-outline-info" %>
+    <%= f.submit class: "btn btn-outline-success"%>
   </div>
 <% end %>
 

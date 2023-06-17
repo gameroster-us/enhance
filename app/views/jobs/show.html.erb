@@ -1,24 +1,26 @@
-<p>
-  <strong>Name:</strong>
-  <%= @job.name %>
-</p>
+<div class="card-body">
+  <p>
+    <strong>Name:</strong>
+    <%= @job.name %>
+  </p>
 
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Employee Name</th>
-      <th>Total working days</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @assessment.each do |as| %>
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= employee_name(as[0]) %></td>
-        <td><%= count_days(as[0], as[1]) %></td>
+        <th>Employee Name</th>
+        <th>Total working days</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @assessment.each do |as| %>
+        <tr>
+          <td><%= employee_name(as[0]) %></td>
+          <td><%= count_days(as[0], as[1]) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

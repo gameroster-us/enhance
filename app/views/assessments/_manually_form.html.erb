@@ -1,15 +1,27 @@
 <%= form_for Assessment.new, url: manually_assign_job_path do |f| %>
-  <p style="border-style: outset; padding: 15px;">
-
-    <%= f.label :Employee %>
-    <%= f.select(:employee_id, Employee.all.collect {|u| [u.name, u.id]}, :prompt => 'Select') %>
-  
-    <%= f.label :Job %>
-    <%= f.select(:job_id, Job.all.collect {|u| [u.name, u.id]}, :prompt => 'Select') %>
-  
-    <%= f.label :Date %>
-    <%= f.date_field :created_at, value: Time.now.strftime('%Y-%m-%d') %>
-  
-    <%= f.submit 'Assign'%>
-  </p>
+  <div class="row mt-5">
+    <div class="col-3">
+      <div class="form-group">
+        <%= f.label :Employee %>
+        <%= select_tag 'assessment[employee_id]', options_from_collection_for_select(Employee.all, "id", "name"), {include_blank: "Select Employee", class: "form-control form-control-sm"} %>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="form-group">
+        <%= f.label :Job %>
+        <%= select_tag 'assessment[job_id]', options_from_collection_for_select(Job.all, "id", "name"), {include_blank: "Select Job",  class: "form-control form-control-sm"} %>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <%= f.label :Date %>
+        <%= f.date_field :created_at, class: "form-control form-control-sm" %>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <%= f.submit 'Assign', class: "btn btn-outline-info btn-sm", style: "margin-top: 32px;" %>
+      </div>
+    </div>
+  </div>
 <% end %>

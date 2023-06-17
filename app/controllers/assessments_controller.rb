@@ -3,7 +3,7 @@ class AssessmentsController < ApplicationController
     if params[:created_at].present?
       @assessments = Assessment.where('DATE(created_at) = ?', params[:created_at])
     else
-      @assessments = Assessment.where(created_at: Date.today.beginning_of_day..Date.today.end_of_day)
+      @assessments = Assessment.all
     end
   end
 

@@ -10,12 +10,10 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group mt-5">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control", placeholder: "Enter Name" %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= link_to 'Back', employees_path, class: "btn btn-outline-info btn-sm" %>
+  <%= f.submit class: "btn btn-outline-primary btn-sm"%>
 <% end %>
