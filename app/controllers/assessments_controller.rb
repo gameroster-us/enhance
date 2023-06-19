@@ -1,4 +1,6 @@
 class AssessmentsController < ApplicationController
+  before_action :authenticate_user!
+  
   def index
     if params[:created_at].present?
       @assessments = Assessment.where('DATE(created_at) = ?', params[:created_at])

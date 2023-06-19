@@ -7,7 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+<% if user_signed_in? %>
+<div class="navbar-nav ml-auto mr-4">
+      <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" style="
+      margin-right: -30px;">
   <div class="container-fluid">   
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item">
@@ -29,15 +32,21 @@
         <%= link_to new_assessment_path, class: "nav-link active mr-aut" do %> Assign job <% end %>
       </li>
     </ul>
-    <div class="navbar-nav ml-auto mr-4">
-      <% if user_signed_in? %>
       <%= link_to "Sign Out", destroy_user_session_path, class: "nav-link text-white" %>
+</nav>
+</div>
       <% else %>
+      <div class="navbar-nav ml-auto mr-4 ">
+      <nav class="navbar sticky-top navbar-expand-lg align-items-end   navbar-dark bg-dark text-right" style="
+      margin-right: -30px;
+      text-align: right ;
+      display: block ;">
         <%= link_to "Sign In", new_user_session_path, class: "nav-link text-white"  %>
+        </nav>
+        </div>
       <% end %>
     </div>
   </div>
-</nav>
 <% if notice %>
   <div class="alert alert-info alert-dismissible fade show" role="alert">
     <p id="notice"><%= notice %></p>
