@@ -3,9 +3,9 @@ class AssessmentsController < ApplicationController
   
   def index
     if params[:created_at].present?
-      @assessments = Assessment.where('DATE(created_at) = ?', params[:created_at]).page(params[:page]).per(10)
+      @assessments = Assessment.where('DATE(created_at) = ?', params[:created_at]).page(params[:page]).per(50)
     else
-      @assessments = Assessment.all.page(params[:page]).per(10)
+      @assessments = Assessment.all.page(params[:page]).per(50)
     end
   end
 

@@ -11,18 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20230614065418) do
+ActiveRecord::Schema.define(version: 20230620103448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "assessments", force: :cascade do |t|
-    t.integer  "job_id"
-    t.integer  "employee_id"
-    t.datetime "dateof_assign"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
+# Could not dump table "assessments" because of following FrozenError
+#   can't modify frozen String: "false"
 
   create_table "employees", force: :cascade do |t|
     t.string   "name"
