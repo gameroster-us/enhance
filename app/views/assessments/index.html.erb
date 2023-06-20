@@ -3,7 +3,7 @@
 
   <%= render 'manually_form' %><hr/>
 
-  <h3>Privious History</h3>
+  <h3>Previous History</h3>
 
   <%= form_tag(assessments_path, method: :get, class: "mt-4") do %>
     <div class="row">
@@ -26,6 +26,7 @@
     <thead>
       <tr>
         <th>Id</th>
+        <th>Assign Type</th>
         <th>Employee Name</th>
         <th>Project Name</th>
         <th>Worked Date</th>
@@ -35,7 +36,8 @@
     <tbody>
       <% @assessments.each do |as| %>
         <tr>
-          <td><%= as.id %></td>
+        <td><%= as.id %></td>
+        <td> <%= as.assessment_type%> </td>
           <td><%= employee_name(as.employee_id) %></td>
           <td><%= job_name(as.job_id) %></td>
           <td><%= as.created_at.strftime("%d/%m/%Y") %></td>
@@ -43,4 +45,7 @@
       <% end %>
     </tbody>
   </table>
+  <div class="pagination">
+  <%= paginate @assessments %>
+  </div>
 </div>

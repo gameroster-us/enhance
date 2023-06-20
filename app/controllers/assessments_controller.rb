@@ -3,9 +3,9 @@ class AssessmentsController < ApplicationController
   
   def index
     if params[:created_at].present?
-      @assessments = Assessment.where('DATE(created_at) = ?', params[:created_at])
+      @assessments = Assessment.where('DATE(created_at) = ?', params[:created_at]).page(params[:page]).per(10)
     else
-      @assessments = Assessment.all
+      @assessments = Assessment.all.page(params[:page]).per(10)
     end
   end
 
@@ -14,7 +14,10 @@ class AssessmentsController < ApplicationController
   end
 
   def manually_assign_job
-    Assessment.create(assessments_params)
+    assessment = Assessment.new(assessments_params)
+    assessment.manual = true
+    assessment.save
+    
     redirect_to assessments_path
   end
 
@@ -47,7 +50,7 @@ class AssessmentsController < ApplicationController
         end
       end
       redirect_to assessments_path
-    else
+    else  
       redirect_to new_assessment_path
     end
   end
@@ -56,7 +59,7 @@ class AssessmentsController < ApplicationController
   def find_job
     if Assessment.where(created_at: Date.today.beginning_of_day..Date.today.end_of_day).blank?
       employee_with_minimum_jobs = Employee.all.min_by { |employee| employee.jobs.count }
-      employee_with_minimum_jobs.jobs.last
+      employee_with_minimum_jobs.jobs.first
     else
       Job.all.sample
     end

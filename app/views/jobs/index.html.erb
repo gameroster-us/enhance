@@ -10,6 +10,7 @@
   <table class="table mt-4">
     <thead>
       <tr>
+        <th>ID</th>
         <th>Name</th>
         <th>Number of capacity</th>
         <th>Employee</th>
@@ -19,7 +20,8 @@
 
     <tbody>
       <% @jobs.each do |job| %>
-        <tr>
+        <tr> 
+          <td><%= job.id %></td>
           <td><%= link_to job.name, job_path(job) %></td>
           <td><%= job.number_of_capacity %></td>
           <td><%= job.employees.pluck(:name).join(', ')%></td>
@@ -29,4 +31,7 @@
       <% end %>
     </tbody>
   </table>
+  <div class="pagination">
+  <%= paginate @jobs %>
+  </div>
 </div>
