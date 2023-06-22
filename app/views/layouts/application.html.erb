@@ -1,52 +1,130 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Enhance</title>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+<script>
+document.addEventListener('turbolinks:before-visit', function() {
+  const navbarCollapse = document.querySelector('#navbarNav');
+  const isSidebarOpen = navbarCollapse.classList.contains("open");
+  sessionStorage.setItem("sidebarState", isSidebarOpen ? "open" : "closed");
+});
+
+document.addEventListener('turbolinks:load', function() {
+  const navbarCollapse = document.querySelector('#navbarNav');
+  const storedSidebarState = sessionStorage.getItem("sidebarState");
+
+  // Ensure the sidebar is closed by default on every page load
+  navbarCollapse.classList.remove("open");
+
+  function toggleSidebar() {
+    navbarCollapse.classList.toggle("open");
+    const isSidebarOpen = navbarCollapse.classList.contains("open");
+    sessionStorage.setItem("sidebarState", isSidebarOpen ? "open" : "closed");
+  }
+
+  // Add click event listener to the document body to handle toggle
+  document.body.addEventListener("click", function(event) {
+    const navbarToggler = document.querySelector('[data-toggle="offcanvas"]');
+    if (event.target === navbarToggler || navbarToggler.contains(event.target)) {
+      toggleSidebar();
+    }
+  });
+
+  // Apply the stored sidebar state if available
+  if (storedSidebarState === "open") {
+    navbarCollapse.classList.add("open");
+  }
+});
+
+
+</script>
+<title>Enhance</title>
+<%= csrf_meta_tags %>
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+
+
+
+
 <body>
+
 <% if user_signed_in? %>
-<div class="navbar-nav ml-auto mr-4">
-      <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" style="
-      margin-right: -30px;">
-  <div class="container-fluid">   
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item">
-        <%= link_to new_employee_path, class: "nav-link active mr-auto" do %> Add Employee <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to new_job_path, class: "nav-link active mr-auto" do %> Add Job <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to jobs_path, class: "nav-link active mr-auto" do %> Job <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to employees_path, class: "nav-link active mr-auto" do %> Employee <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to assessments_path, class: "nav-link active mr-auto" do %> Previous History <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to new_assessment_path, class: "nav-link active mr-aut" do %> Assign job <% end %>
-      </li>
-    </ul>
-      <%= link_to "Sign Out", destroy_user_session_path, class: "nav-link text-white" %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ml-auto">
+<span class"font-main"><%= link_to "ENHANCE", root_path, class: "navbar-brand" %></span>
+<button class="navbar-toggler" type="button" data-toggle="offcanvas">
+  <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+<div class="navbar-nav">
+<ul class="navbar-nav">
+<li class="nav-item">
+<%= link_to new_employee_path, class: "nav-link active mr-auto" do %> Add Employee <% end %>
+</li>
+<li class="nav-item">
+<%= link_to new_job_path, class: "nav-link active mr-auto" do %> Add Job <% end %>
+</li>
+<li class="nav-item">
+<%= link_to jobs_path, class: "nav-link active mr-auto" do %> Job <% end %>
+</li>
+<li class="nav-item">
+<%= link_to employees_path, class: "nav-link active mr-auto" do %> Employee <% end %>
+</li>
+<li class="nav-item">
+<%= link_to assessments_path, class: "nav-link active mr-auto" do %> Previous History <% end %>
+</li>
+<li class="nav-item">
+<%= link_to new_assessment_path, class: "nav-link active mr-aut" do %> Assign job <% end %>
+</li>
+<li class="nav-item">
+</li>
+</ul>
+</div>
+<%= link_to "Sign Out", destroy_user_session_path, class: "nav-link active ml-auto" %>
+</div>
+</nav>
+
+<div class="offcanvas-collapse bg-dark" id="navbarNav">
+<ul class="navbar-nav">
+<li class="nav-item">
+<%= link_to new_employee_path, class: "nav-link active mr-auto" do %> Add Employee <% end %>
+</li>
+<li class="nav-item">
+<%= link_to new_job_path, class: "nav-link active mr-auto" do %> Add Job <% end %>
+</li>
+<li class="nav-item">
+<%= link_to jobs_path, class: "nav-link active mr-auto" do %> Job <% end %>
+</li>
+<li class="nav-item">
+<%= link_to employees_path, class: "nav-link active mr-auto" do %> Employee <% end %>
+</li>
+<li class="nav-item">
+<%= link_to assessments_path, class: "nav-link active mr-auto" do %> Previous History <% end %>
+</li>
+<li class="nav-item">
+<%= link_to new_assessment_path, class: "nav-link active mr-aut" do %> Assign job <% end %>
+</li>
+<li class="nav-item">
+<%= link_to "Sign Out", destroy_user_session_path, class: "nav-link text-white" %>
+</li>
+</ul>
+</div>
+
+
+
+
+<% else %>  
+<div class="navbar-nav ml-auto mr-4 ">
+<nav class="navbar sticky-top navbar-expand-lg align-items-end   navbar-dark bg-dark text-right" style="
+margin-right: -30px;
+text-align: right ;
+display: block ;">
+<%= link_to "Sign In", new_user_session_path, class: "nav-link text-white"  %>
 </nav>
 </div>
-      <% else %>
-      <div class="navbar-nav ml-auto mr-4 ">
-      <nav class="navbar sticky-top navbar-expand-lg align-items-end   navbar-dark bg-dark text-right" style="
-      margin-right: -30px;
-      text-align: right ;
-      display: block ;">
-        <%= link_to "Sign In", new_user_session_path, class: "nav-link text-white"  %>
-        </nav>
-        </div>
-      <% end %>
-    </div>
-  </div>
+<% end %>
+
+<div class="navbar-nav ">
 <% if notice %>
   <div class="alert alert-info alert-dismissible fade show" role="alert">
     <p id="notice"><%= notice %></p>

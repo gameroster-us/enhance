@@ -13,3 +13,58 @@
  */
  @import "bootstrap";
  @import 'jobs.scss';
+/* Custom styles for the off-canvas menu */
+.offcanvas-collapse {
+    position: fixed;
+    top: 56px; /* Height of your navbar */
+    bottom: 0;
+    width: 240px; /* Adjust this value as needed */
+    padding-right: 1rem;
+    overflow-y: auto;
+    background-color: #f8f9fa; /* Change this to your desired background color */
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%);
+  }
+  
+  .offcanvas-collapse.open {
+    transform: translateX(0);
+  }
+  
+  .offcanvas-collapse .nav-link {
+    padding: 0.5rem 1rem;
+  }
+  
+  @media (max-width:1700px) {
+    .offcanvas-collapse {
+      top: 0;
+      padding: 2rem 1rem;
+      z-index: 9999;
+    }
+  }
+  
+  .table-container {
+    position: relative; 
+    z-index: 1; 
+  }
+  
+  .navbar-brand{
+  font-family:monospace ;
+  font-size:xx-large;
+  font-weight: bold;
+  color: white;
+}
+
+.navbar-light .navbar-brand {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+
+.nav-link {
+  color:white ; 
+}
+
+.nav-link:hover {
+  color:rgb(148, 148, 148) ; 
+}
+
+
