@@ -37,7 +37,7 @@
     <thead>
       <tr>
       <th>Worked Date</th>
-      <th>Project Name</th>
+      <th>Job</th>
       <th>Employee Name</th>
         <th colspan="2"></th>
       </tr>
@@ -53,7 +53,7 @@
         <% else %>
           <td></td>
         <% end %>
-        <td><%= assessment_data[:job_name] %></td>
+        <td><%= link_to assessment_data[:job_name], job_path(job_id) %></td>
         <td><%= assessment_data[:employee_names].join(', ') %></td>
       </tr>
       <% previous_date = created_date %>
