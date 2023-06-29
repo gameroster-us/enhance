@@ -4,48 +4,62 @@
   <%= render 'manually_form' %><hr/>
 
   <h3>Previous History</h3>
-
   <%= form_tag(assessments_path, method: :get, class: "mt-4") do %>
     <div class="row">
       <div class="col-4">
         <div class="form-group">
-          <%= date_field_tag :created_at, params[:created_at], class: "form-control"%>
+          <%= label_tag :from_date, "From" %>
+          <%= date_field_tag :from_date, params[:from_date] || (params[:created_at].present? ? params[:created_at] : Date.today), class: "form-control", onchange: "this.form.submit();" %>
         </div>
       </div>
-      <div class="col-1">
-        <%= submit_tag 'Search', class: 'btn btn-outline-info btn-sm' %>
+      <div class="col-4">
+        <div class="form-group">
+          <%= label_tag :to_date, "To" %>
+          <%= date_field_tag :to_date, params[:to_date] || (params[:created_at].present? ? params[:created_at] : Date.today), class: "form-control", onchange: "this.form.submit();" %>
+        </div>
       </div>
-      <div class="col-1">
-        <%= link_to "Clear", assessments_path, class: 'btn btn-outline-info btn-sm' if params[:created_at].present? %>
-      </div>
+     <div class="clear-ex">
+     <div class="col-1">
+     <%= link_to "Clear", assessments_path, class: 'btn btn-outline-info btn-sm' if params[:from_date].present? || params[:to_date].present? || params[:created_at].present? %>
+     </div>
+     <div>
+     <%= link_to "Export to Excel", export_data_path(from_date: params[:from_date], to_date: params[:to_date], format: :csv), class: "btn btn-info", method: :post %>
+   </div>
+     </div>
     </div>
-    
   <% end %>
+  
+  
+  
+
 
   <table class="table mt-5">
     <thead>
       <tr>
-        <th>Id</th>
-        <th>Assign Type</th>
-        <th>Employee Name</th>
-        <th>Project Name</th>
-        <th>Worked Date</th>
+      <th>Worked Date</th>
+      <th>Project Name</th>
+      <th>Employee Name</th>
         <th colspan="2"></th>
       </tr>
     </thead>
     <tbody>
-      <% @assessments.each do |as| %>
-        <tr>
-        <td><%= as.id %></td>
-        <td> <%= as.assessment_type%> </td>
-          <td><%= employee_name(as.employee_id) %></td>
-          <td><%= job_name(as.job_id) %></td>
-          <td><%= as.created_at.strftime("%d/%m/%Y") %></td>
-        </tr>
-      <% end %>
-    </tbody>
+    
+    <% previous_date = nil %>
+    <% @assessments.each do |job_id, assessment_data| %>
+      <% created_date = assessment_data[:created_date] %>
+      <tr>
+        <% if previous_date != created_date %>
+          <td><%= created_date.strftime("%d/%m/%Y") %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <td><%= assessment_data[:job_name] %></td>
+        <td><%= assessment_data[:employee_names].join(', ') %></td>
+      </tr>
+      <% previous_date = created_date %>
+    <% end %>
+    
   </table>
   <div class="pagination">
-  <%= paginate @assessments %>
-  </div>
+  </div>  
 </div>

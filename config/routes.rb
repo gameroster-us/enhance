@@ -9,8 +9,10 @@ Rails.application.routes.draw do
   devise_for :users, :skip => :registration
   post 'manually_assign_job',            to: 'assessments#manually_assign_job',       as: 'manually_assign_job'
 
+  post 'export_data', to: 'assessments#index' , format: :csv
+
   # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  # See how all your routes lay out with "rak e routes".
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

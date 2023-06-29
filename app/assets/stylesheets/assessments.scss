@@ -1,3 +1,18 @@
 // Place all the styles related to the assessments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.clear-ex{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 35px;
+}
+
+.form-control{
+    width: auto;
+}
+
+.div-assign{
+    display: flex;
+}

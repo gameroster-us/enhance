@@ -11,19 +11,22 @@
     </div>
   <% end %>
 
-  <a id='select-all-button' style="cursor: pointer;"> Select/Desect All </a>
+<div class="div-assign"> 
   <div class="field">
+    <a id='select-all-button' style="cursor: pointer;"> Select/Desect All </a>
+    <br>
     <% options = Employee.all.pluck(:name, :id) %>
-
     <% options.each do |option| %>
       <%= check_box_tag 'options[]', option[1] %>
       <%= label_tag option[1], option[0] %><br>
     <% end %>
   </div>
 
-  <div class="form-group">
-    <%= date_field_tag :created_at, params[:created_at], value: Time.now.strftime('%Y-%m-%d'), class: "form-control" %>
+  <div class="form-group" style="
+  margin-left: 15px;">
+   <%= date_field_tag :created_at, params[:created_at], value: Time.now.strftime('%Y-%m-%d'), class: "form-control" %>
   </div>
+</div>
 
   <div class="actions">
     <%= link_to 'Back', assessments_path, class: "btn btn-outline-info" %>
